@@ -18,7 +18,9 @@ export default async function handler(req, res) {
       const body = req.body
       const { error } = urlBody.validate(body)
       if (error) return res.status(500).json({ error })
-      const found = await MiniUrl.findOne({ original: body.original }).exec()
+      const found = await MiniUrl.findOne({ original: body.original })
+        .select(['-_id', '-createdAt', '-updatedAt', '-clicks'])
+        .exec()
       if (found) return res.status(201).json(found)
       const newUrl = new MiniUrl({
         original: body.original,
