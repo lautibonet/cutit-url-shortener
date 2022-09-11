@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 export default function Home() {
   const [longURL, setLongURL] = useState('')
+  const [miniURL, setMiniURL] = useState(null)
 
   const handleClick = () => {
     if (!longURL) return
@@ -16,7 +17,10 @@ export default function Home() {
       body: JSON.stringify({ original: longURL }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data)
+        setMiniURL(data)
+      })
   }
 
   return (
@@ -33,6 +37,15 @@ export default function Home() {
           mb={8}
           type="text"
         ></Input>
+        {miniURL && (
+          <Input
+            disabled
+            value={miniURL.short}
+            variant="outline"
+            mb={8}
+            type="text"
+          ></Input>
+        )}
         <Button colorScheme="blue" onClick={handleClick}>
           Make it Mini!
         </Button>
