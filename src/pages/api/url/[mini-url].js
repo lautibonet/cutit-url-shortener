@@ -18,5 +18,5 @@ export default async function handler(req, res) {
   found.clicks++
   found.save()
 
-  return res.redirect(found.original)
+  return res.status(201).json(found)
 }

@@ -18,17 +18,23 @@ export default async function handler(req, res) {
       const body = req.body
       const { error } = urlBody.validate(body)
       if (error) return res.status(500).json({ error })
+      const basePath = process.env.BASE_PATH
       const found = await MiniUrl.findOne({ original: body.original })
         .select(['-_id', '-createdAt', '-updatedAt', '-clicks'])
         .exec()
-      if (found) return res.status(201).json(found)
+      if (found)
+        return res
+          .status(201)
+          .json({ ...found, short: `${basePath}/${found.short}` })
       const newUrl = new MiniUrl({
         original: body.original,
         short: shortid.generate(),
         clicks: 0,
       })
       const savedUrl = await newUrl.save()
-      return res.status(201).json(savedUrl)
+      return res
+        .status(201)
+        .json({ ...savedUrl, short: `${basePath}/${savedUrl.short}` })
     default:
       return res.status(400).json({ error: 'Method not supported' })
   }

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Flex, Heading, Input, Button } from '@chakra-ui/react'
+import { Flex, Heading, Input, Button, Link } from '@chakra-ui/react'
 import { useState } from 'react'
 
 export default function Home() {
@@ -32,23 +32,19 @@ export default function Home() {
         <Input
           value={longURL}
           onChange={(e) => setLongURL(e.target.value)}
-          placeholder="Looong URL"
+          placeholder="Looong URL here"
           variant="outline"
           mb={8}
           type="text"
         ></Input>
-        {miniURL && (
-          <Input
-            disabled
-            value={miniURL.short}
-            variant="outline"
-            mb={8}
-            type="text"
-          ></Input>
-        )}
         <Button colorScheme="blue" onClick={handleClick}>
           Make it Mini!
         </Button>
+        {miniURL && (
+          <Link href={miniURL.short} mt={8} alignSelf="center">
+            {miniURL.short}
+          </Link>
+        )}
       </Flex>
     </Flex>
   )
