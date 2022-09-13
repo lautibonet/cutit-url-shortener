@@ -8,6 +8,7 @@ import {
   Link,
   IconButton,
   useToast,
+  Box,
 } from '@chakra-ui/react'
 import { useRef, useState } from 'react'
 import { CopyIcon } from '@chakra-ui/icons'
@@ -39,31 +40,50 @@ export default function Home() {
   }
 
   return (
-    <Flex height="100vh" alignItems="center" justifyContent="center">
-      <Flex direction="column" background="gray.100" p={12} rounded={6}>
-        <Heading size="lg" mb={8}>
-          Minify your long URL
-        </Heading>
-        <Input
-          value={longURL}
-          onChange={(e) => setLongURL(e.target.value)}
-          placeholder="Looong URL here"
-          variant="outline"
-          mb={8}
-          type="text"
-        ></Input>
-        <Button colorScheme="blue" onClick={makeItMini}>
-          Make it Mini!
-        </Button>
-        {miniURL && (
-          <Flex alignSelf="center" alignItems="center" mt={8}>
-            <Link href={miniURL.short}>{miniURL.short}</Link>
-            <IconButton ml={2} onClick={saveURLToClipboard}>
-              <CopyIcon></CopyIcon>
-            </IconButton>
+    <>
+      <Flex height="100vh" direction="column">
+        <Box paddingX={4} paddingY={2}>
+          <Image
+            src="/logo.png"
+            height={40}
+            width={100}
+            alt="Mini URL Logo"
+            objectFit="cover"
+          />
+        </Box>
+        <Flex height="100%" alignItems="center" justifyContent="center">
+          <Flex
+            direction="column"
+            background="gray.100"
+            p={12}
+            rounded={6}
+            boxShadow="sm"
+          >
+            <Heading size="lg" mb={8}>
+              Minify your long URL
+            </Heading>
+            <Input
+              value={longURL}
+              onChange={(e) => setLongURL(e.target.value)}
+              placeholder="Looong URL here"
+              variant="outline"
+              mb={8}
+              type="text"
+            ></Input>
+            <Button colorScheme="blue" onClick={makeItMini}>
+              Make it Mini!
+            </Button>
+            {miniURL && (
+              <Flex alignSelf="center" alignItems="center" mt={8}>
+                <Link href={miniURL.short}>{miniURL.short}</Link>
+                <IconButton ml={2} onClick={saveURLToClipboard}>
+                  <CopyIcon></CopyIcon>
+                </IconButton>
+              </Flex>
+            )}
           </Flex>
-        )}
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   )
 }
