@@ -1,13 +1,28 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Flex, Heading, Input, Button, Link } from '@chakra-ui/react'
-import { useState } from 'react'
+import {
+  Flex,
+  Heading,
+  Input,
+  Button,
+  Link,
+  IconButton,
+  useToast,
+} from '@chakra-ui/react'
+import { useRef, useState } from 'react'
+import { CopyIcon } from '@chakra-ui/icons'
 
 export default function Home() {
   const [longURL, setLongURL] = useState('')
   const [miniURL, setMiniURL] = useState(null)
+  const toast = useToast()
 
-  const handleClick = () => {
+  const saveURLToClipboard = () => {
+    navigator.clipboard.writeText(miniURL.short)
+    toast({ description: 'Mini URL copied!' })
+  }
+
+  const makeItMini = () => {
     if (!longURL) return
     fetch('/api/url', {
       method: 'POST',
@@ -37,13 +52,16 @@ export default function Home() {
           mb={8}
           type="text"
         ></Input>
-        <Button colorScheme="blue" onClick={handleClick}>
+        <Button colorScheme="blue" onClick={makeItMini}>
           Make it Mini!
         </Button>
         {miniURL && (
-          <Link href={miniURL.short} mt={8} alignSelf="center">
-            {miniURL.short}
-          </Link>
+          <Flex alignSelf="center" alignItems="center" mt={8}>
+            <Link href={miniURL.short}>{miniURL.short}</Link>
+            <IconButton ml={2} onClick={saveURLToClipboard}>
+              <CopyIcon></CopyIcon>
+            </IconButton>
+          </Flex>
         )}
       </Flex>
     </Flex>
