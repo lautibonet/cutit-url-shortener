@@ -16,6 +16,7 @@ import { CopyIcon } from '@chakra-ui/icons'
 export default function Home() {
   const [longURL, setLongURL] = useState('')
   const [miniURL, setMiniURL] = useState(null)
+  const [loading, setLoading] = useState()
   const toast = useToast()
   const inputRef = createRef()
 
@@ -30,6 +31,7 @@ export default function Home() {
 
   const makeItMini = () => {
     if (!longURL) return
+    setLoading(true)
     fetch('/api/url', {
       method: 'POST',
       headers: {
@@ -39,8 +41,8 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         setMiniURL(data)
+        setLoading(false)
       })
   }
 
@@ -68,6 +70,7 @@ export default function Home() {
               Minify your long URL
             </Heading>
             <Input
+              disabled={loading}
               ref={inputRef}
               value={longURL}
               onChange={(e) => setLongURL(e.target.value)}
@@ -76,7 +79,7 @@ export default function Home() {
               mb={8}
               type="text"
             ></Input>
-            <Button colorScheme="blue" onClick={makeItMini}>
+            <Button disabled={loading} colorScheme="blue" onClick={makeItMini}>
               Make it Mini!
             </Button>
             {miniURL && (
