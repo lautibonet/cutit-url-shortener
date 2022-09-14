@@ -1,34 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# MiniURL
+### Url Shortener
+[Link to App](https://mini-url.vercel.app/)
 
-First, run the development server:
+## Description
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Mini URL is a simple URL shortener web application developed using [NextJs](https://nextjs.org/) react framework, [nodejs](https://nodejs.org/en/), [monogodb](https://www.mongodb.com/) database and deployed on [Vercel](https://vercel.com/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Backend
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Mini URL backend is built using the API routes solution provided by [NextJs](https://nextjs.org/docs/api-routes/introduction) and the app also uses [mongodb](https://www.mongodb.com/) as its no relational database. 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## How it works
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- When entering to the main page, the user is presented with an input field where it can enter a long url to shorten.
+- When clicking on "Make it Mini", the system will generate a new short url.
+- When navigating to the generated URL, the app will redirect the user to the original destination.
+- Mini APP saves analytics such as how many times the generated URL was clicked (but currently this information is not being displayed to the user).
 
-## Learn More
+## Screens
 
-To learn more about Next.js, take a look at the following resources:
+### Main Screen
+![image](https://user-images.githubusercontent.com/8452417/190175145-74a9abf0-9412-4d41-b94c-e9f6f0f644f7.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Main Screen - URL Generated
+![image](https://user-images.githubusercontent.com/8452417/190176164-db5f6258-ca48-4c51-a580-259cec66d619.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Mini URL Not Found
+![image](https://user-images.githubusercontent.com/8452417/190176330-8ae7f387-aa52-4378-9727-b76c1b73583a.png)
