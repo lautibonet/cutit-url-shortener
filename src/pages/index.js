@@ -10,13 +10,18 @@ import {
   useToast,
   Box,
 } from '@chakra-ui/react'
-import { useRef, useState } from 'react'
+import { createRef, useEffect, useRef, useState } from 'react'
 import { CopyIcon } from '@chakra-ui/icons'
 
 export default function Home() {
   const [longURL, setLongURL] = useState('')
   const [miniURL, setMiniURL] = useState(null)
   const toast = useToast()
+  const inputRef = createRef()
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
   const saveURLToClipboard = () => {
     navigator.clipboard.writeText(miniURL.short)
@@ -63,6 +68,7 @@ export default function Home() {
               Minify your long URL
             </Heading>
             <Input
+              ref={inputRef}
               value={longURL}
               onChange={(e) => setLongURL(e.target.value)}
               placeholder="Looong URL here"
