@@ -5,7 +5,7 @@
 
 ## Description
 
-Mini URL is a simple URL shortener web application developed using [NextJs](https://nextjs.org/) react framework, [nodejs](https://nodejs.org/en/), [monogodb](https://www.mongodb.com/) database and deployed on [Vercel](https://vercel.com/)
+Mini URL is a simple URL shortener web application developed using [NextJs](https://nextjs.org/) react framework, [nodejs](https://nodejs.org/en/), [mongodb](https://www.mongodb.com/) database and deployed on [Vercel](https://vercel.com/)
 
 ## Backend
 
